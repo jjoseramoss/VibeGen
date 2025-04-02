@@ -8,12 +8,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class display():
-    def __int__(self, auth_url, query_param, prompt, song_count, submitted):
+    def __int__(self, auth_url, query_param, prompt, song_count, submitted, add_box):
         self.auth_url = auth_url
         self.query_param = query_param
         self.prompt = prompt
         self.song_count = song_count
         self.submitted = submitted
+        self.add_box = add_box
     
     def login_display(self):
         st.title("LogIn")
@@ -44,7 +45,7 @@ class display():
             self.submitted = st.form_submit_button("Create")
             if not self.submitted:
                 return
-  
+          
 if __name__ == "__main__":
     d = display()
     d.login_display()
