@@ -1,21 +1,36 @@
-import config
+import streamlit as st
+import os
+from dotenv import load_dotenv
+from spotify_client_api import SpotifyClient
+from openai_client_api import OpenAIClient
+from playlist_generator import PlaylistGenerator
 
-import spotipy
-from spotipy.oauth2 import SpotifyOAuth
+load_dotenv()
 
-# sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=config.client_id,
-#                                                client_secret=config.secret_client_id,
-#                                                redirect_uri=config.redirect_url,
-#                                                scope="user-library-read"))
+def main():
+    # Login to Spotify
+    authorization_code = SpotifyClient.login_spotify()
+    if not authorization_code:
+        return
 
-# # Simple Code that prints out all of Artist's albums
-# taylor_uri = 'spotify:artist:06HL4z0CvFAxyc27GXpf02'
+    # Get Spotify client
+    spotify_client = SpotifyClient.get_spotify_client(authorization_code)
+    if not spotify_client:
+        return
+    
+    # Initialize OpenAI client
+    openai_client = OpenAIClient()
+    
+    # Initialize playlist generator
+    playlist_generator = PlaylistGenerator(spotify_client, openai_client)
+    
+    # Get user input
+    prompt, song_count = playlist_generator.get_user_input()
+    if not prompt:
+        return
+    
+    # Generate and create playlist
+    playlist_generator.generate_and_create_playlist(prompt, song_count)
 
-# results = sp.artist_albums(taylor_uri, album_type='album')
-# albums = results['items']
-# while results['next']:
-#     results = sp.next(results)
-#     albums.extend(results['items'])
-
-# for album in albums:
-#     print(album['name'])
+if __name__ == "__main__":
+    main()
