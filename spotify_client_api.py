@@ -20,8 +20,8 @@ class SpotifyClient:
         )
 
         # Debugging: Print the response
-        st.write("Response Status Code:", response.status_code)
-        st.write("Response Text:", response.text)
+        # st.write("Response Status Code:", response.status_code)
+        # st.write("Response Text:", response.text)
 
         # Check if 'access_token' exists
         if "access_token" not in response.json():
@@ -36,6 +36,7 @@ class SpotifyClient:
         query_param = st._get_query_params()
         if query_param:
             return query_param["code"][0]
+        st.title("Log In")
         st.write(
             f"Please log in to <a target='_self' href='{auth_url}'>spotify",
             unsafe_allow_html=True,

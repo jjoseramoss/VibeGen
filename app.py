@@ -23,7 +23,7 @@ def get_spotify_client(authorization_code):
 
     # Debugging: Print the response
     st.write("Response Status Code:", response.status_code)
-    st.write("Response Text:", response.text)
+    #st.write("Response Text:", response.text)
 
     # Check if 'access_token' exists
     if "access_token" not in response.json():

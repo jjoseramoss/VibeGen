@@ -37,7 +37,11 @@ class PlaylistGenerator:
         )
         
         # Display success message
+        
         st.write(
             f"Playlist created <a href='{playlist['external_urls']['spotify']}'>Click</a>",
             unsafe_allow_html=True,
         )
+
+        st.write("Enjoy your playlist:sparkles:")
+

@@ -8,6 +8,11 @@ from playlist_generator import PlaylistGenerator
 load_dotenv()
 
 def main():
+    #Title
+    st.title("Welcome to :blue[VibeGen] :headphones::notes:")
+    st.divider()
+    st.markdown('''Music should always fit the vibe! So why not try and find the perfect playlist that fits the mood?''')
+        
     # Login to Spotify
     authorization_code = SpotifyClient.login_spotify()
     if not authorization_code:
