@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from spotify_client_api import SpotifyClient
 from openai_client_api import OpenAIClient
 from playlist_generator import PlaylistGenerator
+from playlist_history import PlaylistHistory
 
 load_dotenv()
 
@@ -36,6 +37,16 @@ def main():
     
     # Generate and create playlist
     playlist_generator.generate_and_create_playlist(prompt, song_count)
+
+    #Playlist History
+    st.subheader("Playlist History:")
+    history = PlaylistHistory()
+    playlists = history.load_all_playlists()
+
+    for p in playlists:
+        st.markdown(f"### {p['playlist_name']}")
+        for song in p['songs']:
+            st.markdown(f"- **{song['songname']}** by *{', '.join(song['artists'])}*")
 
 if __name__ == "__main__":
     main()
