@@ -8,15 +8,15 @@ class OpenAIClient:
     
     def generate_playlist(self, prompt, song_count):
         response = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4-turbo",
             messages=[
                 {
                     "role": "system",
-                    "content": "You are MusicGPT, world's best music recommendation AI. Given a description of a users music preferences, you will recommend songs tailored to the user's preferences."
+                    "content": "You are MusicGPT, the world's best music playlist generator AI. Your task is to create music playlists based on a user's description of a mood, vibe, activity, or feeling. You must: - ONLY generate real, existing songs. - Prioritize popular and recognizable songs (globally or culturally).- Match the user's vibe/theme as closely as possible. - Make sure all songs fit well together stylistically and emotionally. - If the user's input is vague, intelligently guess their intended music style. - DO NOT invent fake songs or unknown artists. Respond ONLY by filling the provided JSON format exactly."
                 },
                 {
                     "role": "user",
-                    "content": f"Create a playlist with {song_count} songs that fits the following description '''{prompt}'''. Come up with a creative and unique name for the playlist."
+                    "content": f"Create a playlist with {song_count} songs that fits the following description '''{prompt}'''. The playlist should include real, popular songs that match the mood or activity well. Ensure musical consistency across the playlist. Do NOT invent songs or artists."
                 },
             ],
             functions=[

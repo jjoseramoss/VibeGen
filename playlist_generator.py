@@ -43,10 +43,15 @@ class PlaylistGenerator:
         
         # Display success message
         
-        st.write(
-            f"Playlist created <a href='{playlist['external_urls']['spotify']}'>Click</a>",
+        st.success("✅ Your playlist was created successfully!")
+
+        st.markdown(
+            f"### 🎸 [Open your Playlist on Spotify]({playlist['external_urls']['spotify']})",
             unsafe_allow_html=True,
         )
 
-        st.write("Enjoy your playlist:sparkles:")
+        st.info("Enjoy your personalized vibes! ✨ Feel free to generate more playlists!")
+        st.divider()
+
+        
 

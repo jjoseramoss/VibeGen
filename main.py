@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import pandas as pd
 from dotenv import load_dotenv
 from spotify_client_api import SpotifyClient
 from openai_client_api import OpenAIClient
@@ -38,15 +39,19 @@ def main():
     # Generate and create playlist
     playlist_generator.generate_and_create_playlist(prompt, song_count)
 
-    #Playlist History
-    st.subheader("Playlist History:")
+    # Show Playlist History
+
+    st.subheader("📚 Playlist History:")
     history = PlaylistHistory()
     playlists = history.load_all_playlists()
 
     for p in playlists:
-        st.markdown(f"### {p['playlist_name']}")
-        for song in p['songs']:
-            st.markdown(f"- **{song['songname']}** by *{', '.join(song['artists'])}*")
+        with st.expander(f"📁 {p['playlist_name']}"):
+            song_data = [
+                {"🎵 Song": s["songname"], "🤘 Artist(s)": ", ".join(s["artists"])}
+                for s in p["songs"]
+            ]
+            st.table(pd.DataFrame(song_data))
 
 if __name__ == "__main__":
     main()
