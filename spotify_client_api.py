@@ -55,11 +55,21 @@ class SpotifyClient:
     
     @staticmethod
     def search_songs(spotify_client, recommended_songs):
-        return [
-            spotify_client.search(
-                q=f"track:{song['songname']} artist:{' '.join(song['artists'])}", 
-                type='track', 
-                limit=1
-            )['tracks']['items'][0]['uri']
-            for song in recommended_songs
-        ]
+        song_uris = []
+        for song in recommended_songs:
+            try:
+                result = spotify_client.search(
+                    q=f"track:{song['songname'].encode('utf-8').decode('unicode_escape')} artist:{' '.join([artist.encode('utf-8').decode('unicode_escape') for artist in song['artists']])}",
+                    type="track",
+                    limit=1
+                )
+                tracks = result['tracks']['items']
+                if tracks:
+                    song_uris.append(tracks[0]['uri'])
+                else:
+                    continue
+            except Exception as e:
+                #Log error, but skip bad songname
+                print(f"Error searching for {song['songname']} - {e}")
+                continue
+        return song_uris
