@@ -72,4 +72,4 @@ class SpotifyClient:
                 #Log error, but skip bad songname
                 print(f"Error searching for {song['songname']} - {e}")
                 continue
-        return song_uris
+        return song_uris 
