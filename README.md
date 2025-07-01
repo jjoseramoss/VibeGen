@@ -36,12 +36,9 @@ Built with a focus on **Object-Oriented Programming (OOP)** principles.
 
 ---
 
-## 📸 Screenshots (Optional)
-- [ ] Screenshot of login page
-- [ ] Screenshot of playlist generation
-- [ ] Screenshot of playlist history
+## 📸 Screenshot
+- [![Demo of login page](/python_project/VibeGen/Project%20Details/vibegen-gif.gif)] 
 
-(Add these once you run your app and capture screens)
 
 ---
 
