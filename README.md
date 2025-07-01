@@ -37,7 +37,7 @@ Built with a focus on **Object-Oriented Programming (OOP)** principles.
 ---
 
 ## 📸 Screenshot
-- [![Demo of login page](/python_project/VibeGen/Project%20Details/vibegen-gif.gif)] 
+- [![Demo of login page](/Project%20Details/vibegen-gif.gif)] 
 
 
 ---
